@@ -17,15 +17,16 @@ from swaggerpy.processors import WebsocketProcessor, SwaggerProcessor
 
 log = logging.getLogger(__name__)
 
-try :
+try:
     encode = urllib.urlencode
-except :
+except:
     encode = urllib.parse.urlencode
-    
-try :
+
+try:
     quote_plus = urllib.quote_plus
-except :
+except:
     quote_plus = urllib.parse.quote_plus
+
 
 class ClientProcessor(SwaggerProcessor):
     """Enriches swagger models for client processing.

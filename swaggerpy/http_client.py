@@ -10,10 +10,7 @@
 import logging
 import requests
 import requests.auth
-try :
-    import urlparse
-except :
-    import urllib.parse as urlparse
+import urllib
 import websocket
 
 log = logging.getLogger(__name__)
@@ -98,7 +95,7 @@ class Authenticator(object):
         :param url: URL to check.
         :return: True if matches host, port and scheme, False otherwise.
         """
-        split = urlparse.urlsplit(url)
+        split = urllib.parse.urlsplit(url)
         return self.host == split.hostname
 
     def apply(self, request):
@@ -202,7 +199,7 @@ class SynchronousHttpClient(HttpClient):
         # for ws scheme types, so we do it manually
         if params:
             joined_params = "&".join(["%s=%s" % (k, v)
-                                     for (k, v) in params.items()])
+                                      for (k, v) in params.items()])
             url += "?%s" % joined_params
         return websocket.create_connection(url, header=header)
 
